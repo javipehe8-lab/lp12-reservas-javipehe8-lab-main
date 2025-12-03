@@ -58,7 +58,32 @@ def reserva_mas_larga(reservas, n):
         resultado.append(tupla_final)
     return resultado
 
-print(reserva_mas_larga(lector, 5))
+
+def cliente_mayor_facturacion(reservas, servicios):
+    dic = {}
+    res = []
+    for a in reservas:
+        if any(servicio in servicios for servicio in a.servicios_adicionales):
+            calculador_facturacion= (a.fecha_salida - a.fecha_entrada).days * a.precio_noche
+            if a.dni not in dic:
+                dic[a.dni] = calculador_facturacion
+            else:
+                dic[a.dni] += calculador_facturacion
+    for dni, facturacion in dic.items():
+        res.append((dni, facturacion))
+    return sorted(res, key=lambda x: x[1], reverse=True)[0]
+
+print(cliente_mayor_facturacion(lector, {"Parking"}))
+
+#def servicios_estrella_por_mes(registros, tipos_habitacion):
+
+
+        
+
+
+
+
+
 
 
 

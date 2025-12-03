@@ -11,6 +11,9 @@ if __name__ == "__main__":
     test_lee_reservas()
 
 
+print("------------------------------------------------------------------------------------")
+
+
 def test_total_facturado():
     fecha_info1 = datetime(2022, 12, 31, 1, 0, 0)
     fecha_info12 = datetime(2022, 1, 2, 1, 0, 0 )
