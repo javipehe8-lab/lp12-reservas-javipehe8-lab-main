@@ -35,7 +35,7 @@ def total_facturado(lector, fecha1, fecha2):
     contador = 0
     for a in lector:
         calculador_dias = (a.fecha_salida - a.fecha_entrada).days
-        if fecha1.date() <= a.fecha_entrada <= fecha2.date():
+        if fecha1 <= a.fecha_entrada <= fecha2:
             contador += calculador_dias * a.precio_noche
     return contador
 
@@ -63,8 +63,8 @@ def cliente_mayor_facturacion(reservas, servicios):
     dic = {}
     res = []
     for a in reservas:
-        if any(servicio in servicios for servicio in a.servicios_adicionales):
-            calculador_facturacion= (a.fecha_salida - a.fecha_entrada).days * a.precio_noche
+        calculador_facturacion= (a.fecha_salida - a.fecha_entrada).days * a.precio_noche
+        if any(servicio in servicios for servicio in a.servicios_adicionales) or servicios == None:
             if a.dni not in dic:
                 dic[a.dni] = calculador_facturacion
             else:
@@ -73,7 +73,7 @@ def cliente_mayor_facturacion(reservas, servicios):
         res.append((dni, facturacion))
     return sorted(res, key=lambda x: x[1], reverse=True)[0]
 
-print(cliente_mayor_facturacion(lector, {"Parking"}))
+print(cliente_mayor_facturacion(lector, {"Gimnasio"}))
 
 #def servicios_estrella_por_mes(registros, tipos_habitacion):
 
